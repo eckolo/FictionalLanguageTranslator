@@ -12,7 +12,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
     public static class TextReconstructor
     {
         public static string ToFictional(this string origin, SpecificCharRepository repos)
-            => (origin?.Any() ?? false)
+            => origin.IsNotEmpty()
             ? origin
             .SeparateSpecialChars(repos)
             .Select(text => text.Translate(repos))

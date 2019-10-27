@@ -15,6 +15,6 @@ namespace FictionalLanguageTranslator.Models.Application.Service
         public static IEnumerable<string> SeparateSpecialChars(this string originText, SpecificCharRepository repos)
             => Regex
             .Split(originText, $"([{repos.specialLetterText}])")
-            .Where(text => text?.Any() ?? false);
+            .Where(text => text.IsNotEmpty());
     }
 }
