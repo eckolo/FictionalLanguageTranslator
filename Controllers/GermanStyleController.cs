@@ -21,7 +21,7 @@ namespace FictionalLanguageTranslator.Controllers
         {
             var japaneseText = japanese ?? "";
             var fictionalText = japaneseText.ToFictional(specificCharRepository);
-            var pronunciation = fictionalText;
+            var pronunciation = fictionalText.ToGermanStylePronunciation(specificCharRepository);
 
             var model = new GermanStyleModel(japaneseText, fictionalText, pronunciation);
 

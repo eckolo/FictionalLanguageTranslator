@@ -16,5 +16,22 @@ namespace FictionalLanguageTranslator.Models.Application.Service
             => Regex
             .Split(originText, $"([{repos.specialLetterText}])")
             .Where(text => text.IsNotEmpty());
+        public static List<string> BreakSyllables(this string origin, SpecificCharRepository repos)
+        {
+            if(!origin.IsNotEmpty())
+                return new List<string>();
+
+            var syllables = repos.consonants.Concat(repos.vowels).Where(letter => letter.IsNotEmpty());
+
+            var syllable = syllables
+                .Where(letter => origin.StartsWith(letter))
+                .OrderByDescending(letter => letter.Length)
+                .First();
+
+            var trailingList = origin.Substring(syllable.Length).BreakSyllables(repos);
+
+            var result = new[] { syllable }.Concat(trailingList).ToList();
+            return result;
+        }
     }
 }
