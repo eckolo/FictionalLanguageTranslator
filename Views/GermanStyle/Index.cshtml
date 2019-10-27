@@ -9,15 +9,18 @@
 
 @using(Html.BeginForm("Index", "GermanStyle", new { charset = "utf8" }, FormMethod.Post, null, new { id = "fm", @class = "form-group" }))
 {
-    <div class="panel panel-info">
-        <div class="panel-heading">Japanese</div>
-        <div class="panel-body">
+    <div class="card">
+        <div class="card-header">Japanese</div>
+        <div class="card-body">
             @Html.TextAreaFor(model => model.japanese, 6, 120, new { id = nameof(Model.japanese), @class = "form-control" })
         </div>
     </div>
     <button type="submit" class="btn btn-primary">Translate</button>
 }
-<div class="panel panel-info">
-    <div class="panel-heading">Fictional</div>
-    <div class="panel-body">@Model.fictional</div>
-</div>
+@if(@Model.fictional?.Any() ?? false)
+{
+    <div class="card">
+        <div class="card-header">Fictional</div>
+        <pre class="card-body">@Model.fictional</pre>
+    </div>
+}
