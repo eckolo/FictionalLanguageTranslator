@@ -40,11 +40,12 @@ namespace FictionalLanguageTranslator.Models.Application.Repository
         /// </summary>
         public List<string> vowels => new List<string>
         {
-            "a", "aa", "au",
-            "e", "ee", "ei", "er", "eu",
+            "a", "aa", "ai", "au", "ay",
+            "e", "ee", "ei", "er", "eu", "ey",
             "i", "ie",
             "o", "oo",
             "u",
+            "y",
             "A", "Au",
             "O",
             "U", "Ur",
