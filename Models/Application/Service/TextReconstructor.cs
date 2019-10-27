@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace FictionalLanguageTranslator.Models.Application.Service
@@ -16,7 +17,8 @@ namespace FictionalLanguageTranslator.Models.Application.Service
             return originText.SeparateSpecialChars().Aggregate((text1, text2) => $"{text1},{text2}");
         }
         static IEnumerable<string> specialChars => SpecificCharactersRepository.specialChars;
+        static string specialCharsText => specialChars.Aggregate((char1, char2) => $"{char1}{char2}");
         public static IEnumerable<string> SeparateSpecialChars(this string originText)
-            => originText.Split(specialChars.ToArray(), StringSplitOptions.None);
+            => Regex.Split(originText, $"([{specialCharsText}])");
     }
 }
