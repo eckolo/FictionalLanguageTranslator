@@ -12,13 +12,11 @@ namespace FictionalLanguageTranslator.Models.Application.Service
     /// </summary>
     public static class TextReconstructor
     {
-        public static string ToFictional(this string originText)
+        public static string ToFictional(this string origin, SpecificCharRepository repos)
         {
-            return originText.SeparateSpecialChars().Aggregate((text1, text2) => $"{text1},{text2}");
+            return origin.SeparateSpecialChars(repos).Aggregate((text1, text2) => $"{text1},{text2}");
         }
-        static IEnumerable<string> specialChars => SpecificCharactersRepository.specialChars;
-        static string specialCharsText => specialChars.Aggregate((char1, char2) => $"{char1}{char2}");
-        public static IEnumerable<string> SeparateSpecialChars(this string originText)
-            => Regex.Split(originText, $"([{specialCharsText}])");
+        public static IEnumerable<string> SeparateSpecialChars(this string originText, SpecificCharRepository repos)
+            => Regex.Split(originText, $"([{repos.specialCharsText}])");
     }
 }

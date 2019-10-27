@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace FictionalLanguageTranslator.Models.Application.Repository
 {
-    public static class SpecificCharactersRepository
+    public class SpecificCharRepository
     {
         /// <summary>
         /// 子音
         /// </summary>
-        public static readonly IEnumerable<string> consonants = new[]
+        public IEnumerable<string> consonants => new[]
         {
             "",
             "b",
@@ -38,7 +38,7 @@ namespace FictionalLanguageTranslator.Models.Application.Repository
         /// <summary>
         /// 母音
         /// </summary>
-        public static readonly IEnumerable<string> vowels = new[]
+        public IEnumerable<string> vowels => new[]
         {
             "a", "aa", "au",
             "e", "ee", "ei", "er", "eu",
@@ -52,7 +52,7 @@ namespace FictionalLanguageTranslator.Models.Application.Repository
         /// <summary>
         /// 記号
         /// </summary>
-        public static readonly IEnumerable<string> specialChars = new[]
+        public IEnumerable<string> specialChars => new[]
         {
             Environment.NewLine,
             "!", "?", "！", "？",
@@ -61,5 +61,9 @@ namespace FictionalLanguageTranslator.Models.Application.Repository
             ",", ".", "、", "。",
             " ", "　",
         };
+        /// <summary>
+        /// 記号を繋げた文字列
+        /// </summary>
+        public string specialCharsText => specialChars.Aggregate((char1, char2) => $"{char1}{char2}");
     }
 }
