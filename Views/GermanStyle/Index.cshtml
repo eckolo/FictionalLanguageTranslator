@@ -24,3 +24,10 @@
         <pre class="card-body">@Model.fictional</pre>
     </div>
 }
+@if(@Model.pronunciation?.Any() ?? false)
+{
+    <div class="card">
+        <div class="card-header">Pronunciation</div>
+        <pre class="card-body">@Model.pronunciation</pre>
+    </div>
+}
