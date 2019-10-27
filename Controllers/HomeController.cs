@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using FictionalLanguageTranslator.Models;
+using FictionalLanguageTranslator.Models.Application.Value;
 
 namespace FictionalLanguageTranslator.Controllers
 {
