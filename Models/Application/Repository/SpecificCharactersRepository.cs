@@ -54,7 +54,7 @@ namespace FictionalLanguageTranslator.Models.Application.Repository
         /// </summary>
         public static readonly IEnumerable<string> specialChars = new[]
         {
-            "\r", "\n", "\r\n",
+            Environment.NewLine,
             "!", "?", "！", "？",
             "「", "」",
             "…",
