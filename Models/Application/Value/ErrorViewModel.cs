@@ -1,6 +1,6 @@
 using System;
 
-namespace FictionalLanguageTranslator.Models
+namespace FictionalLanguageTranslator.Models.Application.Value
 {
     public class ErrorViewModel
     {
