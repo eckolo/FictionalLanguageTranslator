@@ -1,4 +1,5 @@
 ﻿using FictionalLanguageTranslator.Models.Application.Repository;
+using FictionalLanguageTranslator.Models.Application.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +14,42 @@ namespace FictionalLanguageTranslator.Models.Application.Service
     public static class TextReconstructor
     {
         public static string ToFictional(this string origin, SpecificCharRepository repos)
+            => (origin?.Any() ?? false)
+            ? origin
+            .SeparateSpecialChars(repos)
+            .Select(text => text.Translate(repos))
+            .Aggregate((text1, text2) => $"{text1}{text2}")
+            : origin;
+        static string Translate(this string origin, SpecificCharRepository repos)
         {
-            return origin.SeparateSpecialChars(repos).Aggregate((text1, text2) => $"{text1},{text2}");
+            if(origin.IsSpecialChars(repos))
+                return origin;
+
+            var result = origin.ToCodePoint().ToText(repos);
+            return result;
         }
+        static string ToText(this ulong onceCode, SpecificCharRepository repos)
+        {
+            var vowels = repos.vowels;
+            var consonants = repos.consonants;
+
+            var vowelIndex = (int)(onceCode % (ulong)vowels.Count());
+
+            var remainingCode = (onceCode - (ulong)vowelIndex) / (ulong)vowels.Count();
+            var consonantIndex = (int)(remainingCode % (ulong)consonants.Count());
+
+            var vowel = vowels[vowelIndex];
+            var consonant = consonants[consonantIndex];
+
+            var nextCode = (remainingCode - (ulong)consonantIndex) / (ulong)consonants.Count();
+            var nextChar = nextCode <= 0 ? "" : nextCode.ToText(repos);
+            return $"{consonant}{vowel}{nextChar}";
+        }
+        static bool IsSpecialChars(this string text, SpecificCharRepository repos)
+            => !text.Any() || repos.specialChars.Contains(text);
         public static IEnumerable<string> SeparateSpecialChars(this string originText, SpecificCharRepository repos)
-            => Regex.Split(originText, $"([{repos.specialCharsText}])");
+            => Regex
+            .Split(originText, $"([{repos.specialCharsText}])")
+            .Where(text => text?.Any() ?? false);
     }
 }

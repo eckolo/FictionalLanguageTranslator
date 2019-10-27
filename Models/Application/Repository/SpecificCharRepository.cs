@@ -10,7 +10,7 @@ namespace FictionalLanguageTranslator.Models.Application.Repository
         /// <summary>
         /// 子音
         /// </summary>
-        public IEnumerable<string> consonants => new[]
+        public List<string> consonants => new List<string>
         {
             "",
             "b",
@@ -38,25 +38,26 @@ namespace FictionalLanguageTranslator.Models.Application.Repository
         /// <summary>
         /// 母音
         /// </summary>
-        public IEnumerable<string> vowels => new[]
+        public List<string> vowels => new List<string>
         {
             "a", "aa", "au",
             "e", "ee", "ei", "er", "eu",
             "i", "ie",
             "o", "oo",
             "u",
-            "a:", "a:u",
-            "o:",
-            "u:", "u:r",
+            "A", "Au",
+            "O",
+            "U", "Ur",
         };
         /// <summary>
         /// 記号
         /// </summary>
         public IEnumerable<string> specialChars => new[]
         {
-            Environment.NewLine,
+            "\r", "\n", "\r\n",
             "!", "?", "！", "？",
-            "「", "」",
+            "「", "」", "（", "）", "\"", "\'",
+            ":", ";",
             "…",
             ",", ".", "、", "。",
             " ", "　",
