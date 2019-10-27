@@ -1,0 +1,23 @@
+﻿@model FictionalLanguageTranslator.Models.Application.Value.GermanStyleModel
+@{
+    ViewData["Title"] = "German Style";
+}
+
+<div class="jumbotron">
+    <h1>ドイツ語っぽい発音の架空言語翻訳機</h1>
+</div>
+
+@using(Html.BeginForm("Index", "GermanStyle", new { charset = "utf8" }, FormMethod.Post, null, new { id = "fm", @class = "form-group" }))
+{
+    <div class="panel panel-info">
+        <div class="panel-heading">Japanese</div>
+        <div class="panel-body">
+            @Html.TextAreaFor(model => model.japanese, 6, 120, new { id = nameof(Model.japanese), @class = "form-control" })
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Translate</button>
+}
+<div class="panel panel-info">
+    <div class="panel-heading">Fictional</div>
+    <div class="panel-body">@Model.fictional</div>
+</div>
