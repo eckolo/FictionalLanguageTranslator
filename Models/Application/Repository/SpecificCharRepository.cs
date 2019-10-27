@@ -19,7 +19,6 @@ namespace FictionalLanguageTranslator.Models.Application.Repository
             "f",
             "g",
             "h",
-            "ig",
             "j",
             "k",
             "l",
@@ -42,7 +41,7 @@ namespace FictionalLanguageTranslator.Models.Application.Repository
         {
             "a", "aa", "ai", "au", "ay",
             "e", "ee", "ei", "er", "eu", "ey",
-            "i", "ie",
+            "i", "ie", "ig",
             "o", "oo",
             "u",
             "y",
