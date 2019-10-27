@@ -43,7 +43,5 @@ namespace FictionalLanguageTranslator.Models.Application.Service
             var nextChar = nextCode <= 0 ? "" : nextCode.ToText(repos);
             return $"{consonant}{vowel}{nextChar}";
         }
-        static bool IsSpecialChars(this string text, SpecificCharRepository repos)
-            => !text.Any() || repos.specialLetter.Any(letter => text.Contains(letter));
     }
 }
