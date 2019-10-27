@@ -1,9 +1,7 @@
 ﻿using FictionalLanguageTranslator.Models.Application.Repository;
-using FictionalLanguageTranslator.Models.Application.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace FictionalLanguageTranslator.Models.Application.Service
@@ -47,9 +45,5 @@ namespace FictionalLanguageTranslator.Models.Application.Service
         }
         static bool IsSpecialChars(this string text, SpecificCharRepository repos)
             => !text.Any() || repos.specialLetter.Any(letter => text.Contains(letter));
-        public static IEnumerable<string> SeparateSpecialChars(this string originText, SpecificCharRepository repos)
-            => Regex
-            .Split(originText, $"([{repos.specialLetterText}])")
-            .Where(text => text?.Any() ?? false);
     }
 }
