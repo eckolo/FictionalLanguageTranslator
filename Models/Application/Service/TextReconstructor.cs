@@ -46,10 +46,10 @@ namespace FictionalLanguageTranslator.Models.Application.Service
             return $"{consonant}{vowel}{nextChar}";
         }
         static bool IsSpecialChars(this string text, SpecificCharRepository repos)
-            => !text.Any() || repos.specialChars.Contains(text);
+            => !text.Any() || repos.specialLetter.Any(letter => text.Contains(letter));
         public static IEnumerable<string> SeparateSpecialChars(this string originText, SpecificCharRepository repos)
             => Regex
-            .Split(originText, $"([{repos.specialCharsText}])")
+            .Split(originText, $"([{repos.specialLetterText}])")
             .Where(text => text?.Any() ?? false);
     }
 }

@@ -52,19 +52,22 @@ namespace FictionalLanguageTranslator.Models.Application.Repository
         /// <summary>
         /// 記号
         /// </summary>
-        public IEnumerable<string> specialChars => new[]
+        public IEnumerable<char> specialLetter => new[]
         {
-            "\r", "\n", "\r\n",
-            "!", "?", "！", "？",
-            "「", "」", "（", "）", "\"", "\'",
-            ":", ";",
-            "…",
-            ",", ".", "、", "。",
-            " ", "　",
+            '\r', '\n',
+            '!', '?', '！', '？',
+            '「', '」', '（', '）', '\'', '\'',
+            ':', ';',
+            '…',
+            ',', '.', '、', '。',
+            ' ', '　',
         };
         /// <summary>
         /// 記号を繋げた文字列
         /// </summary>
-        public string specialCharsText => specialChars.Aggregate((char1, char2) => $"{char1}{char2}");
+        public string specialLetterText
+            => specialLetter
+            .Select(letter => letter.ToString())
+            .Aggregate((letter1, letter2) => $"{letter1}{letter2}");
     }
 }
