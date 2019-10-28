@@ -13,7 +13,7 @@ namespace FictionalLanguageTranslator.Models.Application.Repository
         public List<string> consonants => new List<string>
         {
             "",
-            "b",
+            "b", "br",
             "c", "ch", "chs",
             "d", "dt",
             "f",
@@ -39,14 +39,14 @@ namespace FictionalLanguageTranslator.Models.Application.Repository
         /// </summary>
         public List<string> vowels => new List<string>
         {
-            "a", "aa", "ai", "au", "ay",
-            "e", "ee", "ei", "er", "eu", "ey",
-            "i", "ie", "ig",
-            "o", "oo",
-            "u",
+            "a", "aa", "ai", "ar", "au", "ay",
+            "e", "ee", "eer", "ei", "er", "eu", "eur", "ey",
+            "i", "ie", "ier", "ig", "ir",
+            "o", "oo", "or",
+            "u", "ur",
             "y",
-            "A", "Au",
-            "O",
+            "A", "Ar", "Au",
+            "O", "Or",
             "U", "Ur",
         };
         /// <summary>
