@@ -11,9 +11,10 @@ namespace FictionalLanguageTranslator.Models.Application.Service
             this (string consonant, string vowel) word,
             bool isFirst,
             bool isLast,
-            string lastSyllable,
-            string nextSyllable,
+            string lastWord,
+            string nextWord,
             string longVowel,
+            string lastSyllable,
             IEnumerable<string> vowels)
             => word.consonant switch
             {
@@ -165,7 +166,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Ur" => "ツィ" + (isLast ? "ー" : "ァ"),
                     _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
                 },
-                "ch" => new[] { "a", "o", "u", "au" }.Contains(lastSyllable)
+                "ch" => new[] { "a", "o", "u", "au" }.Contains(lastWord)
                     ? word.vowel switch
                     {
                         "" => "フ",
@@ -425,9 +426,9 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Ur" => "グィ" + (isLast ? "ー" : "ァ"),
                     _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
                 },
-                "h" => vowels.Contains(lastSyllable)
-                    ? "ー" + ("", word.vowel)
-                        .ToSyllable(isFirst, isLast, lastSyllable, nextSyllable, longVowel, vowels)
+                "h" => vowels.Contains(lastWord)
+                    ? (lastSyllable.EndsWith("ー") ? "" : "ー")
+                        + ("", word.vowel).ToSyllable(isFirst, isLast, lastWord, nextWord, longVowel, lastSyllable, vowels)
                     : word.vowel switch
                     {
                         "" => "フ",
@@ -1244,8 +1245,8 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Ur" => "トゥィ" + (isLast ? "ー" : "ァ"),
                     _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
                 },
-                "ti" => "ツィ" + ("", word.vowel)
-                    .ToSyllable(isFirst, isLast, lastSyllable, nextSyllable, longVowel, vowels),
+                "ti" => "ツィ"
+                    + ("", word.vowel).ToSyllable(isFirst, isLast, lastWord, nextWord, longVowel, lastSyllable, vowels),
                 "ts" => word.vowel switch
                 {
                     "" => "ツ",

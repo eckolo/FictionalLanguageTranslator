@@ -26,35 +26,36 @@ namespace FictionalLanguageTranslator.Models.Application.Service
             var result = origin.BreakSyllables(repos).RaiseSyllablesLetters(repos);
             return result;
         }
-        static string RaiseSyllablesLetters(this List<string> syllableList, SpecificCharRepository repos, bool isFirst = true, string lastSyllable = "")
+        static string RaiseSyllablesLetters(this List<string> wordList, SpecificCharRepository repos, bool isFirst = true, string lastWord = "", string lastSyllable = "")
         {
-            if(syllableList is null || !syllableList.Any())
+            if(wordList is null || !wordList.Any())
                 return "";
 
-            var head = syllableList.First();
+            var head = wordList.First();
             var headIsConsonants = repos.consonants.Contains(head);
 
             var consonant = headIsConsonants ? head : "";
-            var vowel = headIsConsonants ? (syllableList.Skip(1).FirstOrDefault() ?? "") : head;
-            var trailingSyllables = syllableList.Skip(headIsConsonants ? 2 : 1).ToList();
+            var vowel = headIsConsonants ? (wordList.Skip(1).FirstOrDefault() ?? "") : head;
+            var trailingWords = wordList.Skip(headIsConsonants ? 2 : 1).ToList();
 
-            var isLast = !trailingSyllables.Any();
-            var nextSyllable = trailingSyllables.FirstOrDefault();
-            var longVowel = (!isLast && repos.consonants.Contains(nextSyllable) && nextSyllable.Length == 1)
+            var isLast = !trailingWords.Any();
+            var nextWord = trailingWords.FirstOrDefault();
+            var longVowel = (!isLast && repos.consonants.Contains(nextWord) && nextWord.Length == 1)
                 ? "ー"
                 : "";
-            var nextLastSyllable = vowel.Any() ? vowel : consonant;
+            var nextLastWord = vowel.Any() ? vowel : consonant;
 
             var nowSyllable = (consonant, vowel)
                 .ToSyllable(
                 isFirst: isFirst,
                 isLast: isLast,
-                lastSyllable: lastSyllable,
-                nextSyllable: nextSyllable,
+                lastWord: lastWord,
+                nextWord: nextWord,
                 longVowel: longVowel,
+                lastSyllable: lastSyllable,
                 vowels: repos.vowels);
 
-            var nextNowSyllable = trailingSyllables.RaiseSyllablesLetters(repos, false, nextLastSyllable);
+            var nextNowSyllable = trailingWords.RaiseSyllablesLetters(repos, false, nextLastWord, nowSyllable);
 
             return $"{nowSyllable}{nextNowSyllable}";
         }
