@@ -36,7 +36,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
 
             var consonant = headIsConsonants ? head : "";
             var vowel = headIsConsonants ? (syllableList.Skip(1).FirstOrDefault() ?? "") : head;
-            var trailingSyllables = syllableList.Skip(2).ToList();
+            var trailingSyllables = syllableList.Skip(headIsConsonants ? 2 : 1).ToList();
 
             var isLast = !trailingSyllables.Any();
             var nextSyllable = trailingSyllables.FirstOrDefault();
