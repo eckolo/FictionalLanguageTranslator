@@ -40,9 +40,6 @@ namespace FictionalLanguageTranslator.Models.Application.Service
 
             var isLast = !trailingWords.Any();
             var nextWord = trailingWords.FirstOrDefault();
-            var longVowel = (!isLast && repos.consonants.Contains(nextWord) && nextWord.Length == 1)
-                ? "ー"
-                : "";
             var nextLastWord = vowel.Any() ? vowel : consonant;
 
             var nowSyllable = (consonant, vowel)
@@ -51,7 +48,6 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                 isLast: isLast,
                 lastWord: lastWord,
                 nextWord: nextWord,
-                longVowel: longVowel,
                 lastSyllable: lastSyllable,
                 vowels: repos.vowels);
 
