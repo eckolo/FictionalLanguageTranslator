@@ -36,7 +36,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
             var nextCode = (originCode - (ulong)consonantIndex) / (ulong)consonants.Count();
             var nextChar = nextCode > 0 ? nextCode.PickVowels(repos) : "";
 
-            return $"{consonant}{nextChar}";
+            return $"{nextChar}{consonant}";
         }
         static string PickVowels(this ulong originCode, SpecificCharRepository repos)
         {
@@ -47,7 +47,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
 
             var nextCode = (originCode - (ulong)vowelIndex) / (ulong)vowels.Count();
             var nextChar = nextCode > 0 ? nextCode.PickConsonant(repos) : "";
-            return $"{vowel}{nextChar}";
+            return $"{nextChar}{vowel}";
         }
     }
 }

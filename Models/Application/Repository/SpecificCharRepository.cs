@@ -13,8 +13,8 @@ namespace FictionalLanguageTranslator.Models.Application.Repository
         public List<string> consonants => new List<string>
         {
             "",
-            "b", "br",
-            "c", "ch", "chs",
+            "b",
+            "c", "ch",
             "d", "dt",
             "f",
             "g",
@@ -23,12 +23,12 @@ namespace FictionalLanguageTranslator.Models.Application.Repository
             "k",
             "l",
             "m",
-            "n", "ng",
+            "n",
             "p", "pf",
             "qu",
-            "r", "rh",
-            "s", "sch", "sp", "ss", "st", "B",
-            "t", "th", "ti", "ts", "tz", "tsch",
+            "r",
+            "s", "sch", "sp", "ss", "st",
+            "t", "th",  "ts", "tz", "tsch",
             "v",
             "w",
             "x",
@@ -59,7 +59,7 @@ namespace FictionalLanguageTranslator.Models.Application.Repository
             '「', '」', '（', '）', '\'', '\'',
             ':', ';',
             '…',
-            ',', '.', '、', '。',
+            ',', '.', '、', '。', '・',
             ' ', '　',
         };
         /// <summary>

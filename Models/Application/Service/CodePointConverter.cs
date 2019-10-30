@@ -17,8 +17,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
         /// <returns>圧縮文字コード</returns>
         public static ulong ToCodePoint(this string text)
             => text
-            .Reverse()
             .Select(code => (ulong)code)
-            .Aggregate((code1, code2) => code1 * 0x100 + code2);
+            .Aggregate((code1, code2) => code1 * 0x10 + code2);
     }
 }
