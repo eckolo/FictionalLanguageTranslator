@@ -26,11 +26,11 @@ namespace FictionalLanguageTranslator.Models.Application.Service
             var syllable = syllables
                 .Where(letter => origin.StartsWith(letter))
                 .OrderByDescending(letter => letter.Length)
-                .First();
+                .FirstOrDefault();
 
-            var trailingList = origin.Substring(syllable.Length).BreakSyllables(repos);
+            var trailingList = origin.Substring(syllable?.Length ?? 1).BreakSyllables(repos);
 
-            var result = new[] { syllable }.Concat(trailingList).ToList();
+            var result = (syllable is string ? new[] { syllable } : new string[] { }).Concat(trailingList).ToList();
             return result;
         }
     }
