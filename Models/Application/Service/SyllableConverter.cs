@@ -37,7 +37,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "i" => "イ",
                     "ie" => "イー",
                     "ier" => "イ" + (isLast ? "アー" : "ーァ"),
-                    "ig" => (isLast ? "イク" : "イグ"),
+                    "ig" => (isLast ? "イヒ" : "イク"),
                     "ir" => "イ" + (isLast ? "ー" : "ァ"),
                     "o" => "オ",
                     "oo" => "オー",
@@ -52,7 +52,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Or" => "オェ" + (isLast ? "ー" : "ァ"),
                     "U" => "ウィ",
                     "Ur" => "ウィ" + (isLast ? "ー" : "ァ"),
-                    _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                    _ => word.vowel,
                 },
                 "b" => word.vowel switch
                 {
@@ -74,7 +74,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "i" => "ビ",
                     "ie" => "ビー",
                     "ier" => "ビ" + (isLast ? "アー" : "ーァ"),
-                    "ig" => (isLast ? "ビク" : "ビグ"),
+                    "ig" => (isLast ? "ビヒ" : "ビク"),
                     "ir" => "ビ" + (isLast ? "ー" : "ァ"),
                     "o" => "ボ",
                     "oo" => "ボー",
@@ -89,7 +89,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Or" => "ボェ" + (isLast ? "ー" : "ァ"),
                     "U" => "ブィ",
                     "Ur" => "ブィ" + (isLast ? "ー" : "ァ"),
-                    _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                    _ => word.vowel,
                 },
                 "br" => word.vowel switch
                 {
@@ -111,7 +111,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "i" => "プリ",
                     "ie" => "プリー",
                     "ier" => "プリ" + (isLast ? "アー" : "ーァ"),
-                    "ig" => (isLast ? "プリク" : "プリグ"),
+                    "ig" => (isLast ? "プリヒ" : "プリク"),
                     "ir" => "プリ" + (isLast ? "ー" : "ァ"),
                     "o" => "プロ",
                     "oo" => "プロー",
@@ -126,7 +126,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Or" => "プロェ" + (isLast ? "ー" : "ァ"),
                     "U" => "プルィ",
                     "Ur" => "プルィ" + (isLast ? "ー" : "ァ"),
-                    _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                    _ => word.vowel,
                 },
                 "c" => word.vowel switch
                 {
@@ -148,7 +148,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "i" => "ツィ",
                     "ie" => "ツィー",
                     "ier" => "ツィ" + (isLast ? "アー" : "ーァ"),
-                    "ig" => (isLast ? "ツィク" : "ツィグ"),
+                    "ig" => (isLast ? "ツィヒ" : "ツィク"),
                     "ir" => "ツィ" + (isLast ? "ー" : "ァ"),
                     "o" => "ツォ",
                     "oo" => "ツォー",
@@ -163,7 +163,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Or" => "ツォェ" + (isLast ? "ー" : "ァ"),
                     "U" => "ツィ",
                     "Ur" => "ツィ" + (isLast ? "ー" : "ァ"),
-                    _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                    _ => word.vowel,
                 },
                 "ch" => new[] { "a", "o", "u", "au" }.Contains(lastWord)
                     ? word.vowel switch
@@ -186,7 +186,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                         "i" => "ヒ",
                         "ie" => "ヒー",
                         "ier" => "ヒ" + (isLast ? "アー" : "ーァ"),
-                        "ig" => (isLast ? "ヒク" : "ヒグ"),
+                        "ig" => (isLast ? "ヒヒ" : "ヒク"),
                         "ir" => "ヒ" + (isLast ? "ー" : "ァ"),
                         "o" => "ホ",
                         "oo" => "ホー",
@@ -201,7 +201,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                         "Or" => "ホェ" + (isLast ? "ー" : "ァ"),
                         "U" => "フィ",
                         "Ur" => "フィ" + (isLast ? "ー" : "ァ"),
-                        _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                        _ => word.vowel,
                     }
                     : word.vowel switch
                     {
@@ -223,7 +223,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                         "i" => "ヒィ",
                         "ie" => "ヒィー",
                         "ier" => "ヒィ" + (isLast ? "アー" : "ーァ"),
-                        "ig" => (isLast ? "ヒィク" : "ヒィグ"),
+                        "ig" => (isLast ? "ヒィヒ" : "ヒィク"),
                         "ir" => "ヒィ" + (isLast ? "ー" : "ァ"),
                         "o" => "ヒョ",
                         "oo" => "ヒョー",
@@ -238,7 +238,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                         "Or" => "ヒョェ" + (isLast ? "ー" : "ァ"),
                         "U" => "ヒュィ",
                         "Ur" => "ヒュィ" + (isLast ? "ー" : "ァ"),
-                        _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                        _ => word.vowel,
                     },
                 "chs" => word.vowel switch
                 {
@@ -260,7 +260,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "i" => "クシ",
                     "ie" => "クシー",
                     "ier" => "クシ" + (isLast ? "アー" : "ーァ"),
-                    "ig" => (isLast ? "クシク" : "クシグ"),
+                    "ig" => (isLast ? "クシヒ" : "クシク"),
                     "ir" => "クシ" + (isLast ? "ー" : "ァ"),
                     "o" => "クソ",
                     "oo" => "クソー",
@@ -275,7 +275,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Or" => "クソェ" + (isLast ? "ー" : "ァ"),
                     "U" => "クスィ",
                     "Ur" => "クスィ" + (isLast ? "ー" : "ァ"),
-                    _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                    _ => word.vowel,
                 },
                 "d" => word.vowel switch
                 {
@@ -297,7 +297,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "i" => "ディ",
                     "ie" => "ディー",
                     "ier" => "ディ" + (isLast ? "アー" : "ーァ"),
-                    "ig" => (isLast ? "ディク" : "ディグ"),
+                    "ig" => (isLast ? "ディヒ" : "ディク"),
                     "ir" => "ディ" + (isLast ? "ー" : "ァ"),
                     "o" => "ド",
                     "oo" => "ドー",
@@ -312,7 +312,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Or" => "ドェ" + (isLast ? "ー" : "ァ"),
                     "U" => "ドゥィ",
                     "Ur" => "ドゥィ" + (isLast ? "ー" : "ァ"),
-                    _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                    _ => word.vowel,
                 },
                 "dt" => word.vowel switch
                 {
@@ -334,7 +334,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "i" => "ティ",
                     "ie" => "ティー",
                     "ier" => "ティ" + (isLast ? "アー" : "ーァ"),
-                    "ig" => (isLast ? "ティク" : "ティグ"),
+                    "ig" => (isLast ? "ティヒ" : "ティク"),
                     "ir" => "ティ" + (isLast ? "ー" : "ァ"),
                     "o" => "ト",
                     "oo" => "トー",
@@ -349,7 +349,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Or" => "トェ" + (isLast ? "ー" : "ァ"),
                     "U" => "トゥィ",
                     "Ur" => "トゥィ" + (isLast ? "ー" : "ァ"),
-                    _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                    _ => word.vowel,
                 },
                 "f" => word.vowel switch
                 {
@@ -371,7 +371,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "i" => "フィ",
                     "ie" => "フィー",
                     "ier" => "フィ" + (isLast ? "アー" : "ーァ"),
-                    "ig" => (isLast ? "フィク" : "フィグ"),
+                    "ig" => (isLast ? "フィヒ" : "フィク"),
                     "ir" => "フィ" + (isLast ? "ー" : "ァ"),
                     "o" => "フォ",
                     "oo" => "フォー",
@@ -386,7 +386,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Or" => "フォェ" + (isLast ? "ー" : "ァ"),
                     "U" => "フィ",
                     "Ur" => "フィ" + (isLast ? "ー" : "ァ"),
-                    _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                    _ => word.vowel,
                 },
                 "g" => word.vowel switch
                 {
@@ -408,7 +408,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "i" => "ギ",
                     "ie" => "ギー",
                     "ier" => "ギ" + (isLast ? "アー" : "ーァ"),
-                    "ig" => (isLast ? "ギク" : "ギグ"),
+                    "ig" => (isLast ? "ギヒ" : "ギク"),
                     "ir" => "ギ" + (isLast ? "ー" : "ァ"),
                     "o" => "ゴ",
                     "oo" => "ゴー",
@@ -423,7 +423,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Or" => "ゴェ" + (isLast ? "ー" : "ァ"),
                     "U" => "グィ",
                     "Ur" => "グィ" + (isLast ? "ー" : "ァ"),
-                    _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                    _ => word.vowel,
                 },
                 "h" => word.vowel switch
                 {
@@ -448,7 +448,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "i" => "ヒ",
                     "ie" => "ヒー",
                     "ier" => "ヒ" + (isLast ? "アー" : "ーァ"),
-                    "ig" => (isLast ? "ヒク" : "ヒグ"),
+                    "ig" => (isLast ? "ヒヒ" : "ヒク"),
                     "ir" => "ヒ" + (isLast ? "ー" : "ァ"),
                     "o" => "ホ",
                     "oo" => "ホー",
@@ -463,7 +463,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Or" => "ホェ" + (isLast ? "ー" : "ァ"),
                     "U" => "フィ",
                     "Ur" => "フィ" + (isLast ? "ー" : "ァ"),
-                    _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                    _ => word.vowel,
                 },
                 "j" => word.vowel switch
                 {
@@ -485,7 +485,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "i" => "ユィ",
                     "ie" => "ユィー",
                     "ier" => "ユィ" + (isLast ? "アー" : "ーァ"),
-                    "ig" => (isLast ? "ユィク" : "ユィグ"),
+                    "ig" => (isLast ? "ユィヒ" : "ユィク"),
                     "ir" => "ユィ" + (isLast ? "ー" : "ァ"),
                     "o" => "ヨ",
                     "oo" => "ヨー",
@@ -500,7 +500,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Or" => "ヨェ" + (isLast ? "ー" : "ァ"),
                     "U" => "ユィ",
                     "Ur" => "ユィ" + (isLast ? "ー" : "ァ"),
-                    _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                    _ => word.vowel,
                 },
                 "k" => word.vowel switch
                 {
@@ -522,7 +522,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "i" => "キ",
                     "ie" => "キー",
                     "ier" => "キ" + (isLast ? "アー" : "ーァ"),
-                    "ig" => (isLast ? "キク" : "キグ"),
+                    "ig" => (isLast ? "キヒ" : "キク"),
                     "ir" => "キ" + (isLast ? "ー" : "ァ"),
                     "o" => "コ",
                     "oo" => "コー",
@@ -537,7 +537,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Or" => "コェ" + (isLast ? "ー" : "ァ"),
                     "U" => "クィ",
                     "Ur" => "クィ" + (isLast ? "ー" : "ァ"),
-                    _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                    _ => word.vowel,
                 },
                 "l" => word.vowel switch
                 {
@@ -559,7 +559,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "i" => "リ",
                     "ie" => "リー",
                     "ier" => "リ" + (isLast ? "アー" : "ーァ"),
-                    "ig" => (isLast ? "リク" : "リグ"),
+                    "ig" => (isLast ? "リヒ" : "リク"),
                     "ir" => "リ" + (isLast ? "ー" : "ァ"),
                     "o" => "ロ",
                     "oo" => "ロー",
@@ -574,7 +574,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Or" => "ロェ" + (isLast ? "ー" : "ァ"),
                     "U" => "ルィ",
                     "Ur" => "ルィ" + (isLast ? "ー" : "ァ"),
-                    _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                    _ => word.vowel,
                 },
                 "m" => word.vowel switch
                 {
@@ -596,7 +596,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "i" => "ミ",
                     "ie" => "ミー",
                     "ier" => "ミ" + (isLast ? "アー" : "ーァ"),
-                    "ig" => (isLast ? "ミク" : "ミグ"),
+                    "ig" => (isLast ? "ミヒ" : "ミク"),
                     "ir" => "ミ" + (isLast ? "ー" : "ァ"),
                     "o" => "モ",
                     "oo" => "モー",
@@ -611,7 +611,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Or" => "モェ" + (isLast ? "ー" : "ァ"),
                     "U" => "ムィ",
                     "Ur" => "ムィ" + (isLast ? "ー" : "ァ"),
-                    _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                    _ => word.vowel,
                 },
                 "n" => word.vowel switch
                 {
@@ -633,7 +633,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "i" => "ニ",
                     "ie" => "ニー",
                     "ier" => "ニ" + (isLast ? "アー" : "ーァ"),
-                    "ig" => (isLast ? "ニク" : "ニグ"),
+                    "ig" => (isLast ? "ニヒ" : "ニク"),
                     "ir" => "ニ" + (isLast ? "ー" : "ァ"),
                     "o" => "ノ",
                     "oo" => "ノー",
@@ -648,7 +648,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Or" => "ノェ" + (isLast ? "ー" : "ァ"),
                     "U" => "ヌィ",
                     "Ur" => "ヌィ" + (isLast ? "ー" : "ァ"),
-                    _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                    _ => word.vowel,
                 },
                 "ng" => word.vowel switch
                 {
@@ -670,7 +670,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "i" => "ンギ",
                     "ie" => "ンギー",
                     "ier" => "ンギ" + (isLast ? "アー" : "ーァ"),
-                    "ig" => (isLast ? "ンギク" : "ンギグ"),
+                    "ig" => (isLast ? "ンギヒ" : "ンギク"),
                     "ir" => "ンギ" + (isLast ? "ー" : "ァ"),
                     "o" => "ンゴ",
                     "oo" => "ンゴー",
@@ -685,7 +685,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Or" => "ンゴェ" + (isLast ? "ー" : "ァ"),
                     "U" => "ングィ",
                     "Ur" => "ングィ" + (isLast ? "ー" : "ァ"),
-                    _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                    _ => word.vowel,
                 },
                 "p" => word.vowel switch
                 {
@@ -707,7 +707,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "i" => "ピ",
                     "ie" => "ピー",
                     "ier" => "ピ" + (isLast ? "アー" : "ーァ"),
-                    "ig" => (isLast ? "ピク" : "ピグ"),
+                    "ig" => (isLast ? "ピヒ" : "ピク"),
                     "ir" => "ピ" + (isLast ? "ー" : "ァ"),
                     "o" => "ポ",
                     "oo" => "ポー",
@@ -722,7 +722,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Or" => "ポェ" + (isLast ? "ー" : "ァ"),
                     "U" => "プィ",
                     "Ur" => "プィ" + (isLast ? "ー" : "ァ"),
-                    _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                    _ => word.vowel,
                 },
                 "pf" => word.vowel switch
                 {
@@ -744,7 +744,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "i" => "プフィ",
                     "ie" => "プフィー",
                     "ier" => "プフィ" + (isLast ? "アー" : "ーァ"),
-                    "ig" => (isLast ? "プフィク" : "プフィグ"),
+                    "ig" => (isLast ? "プフィヒ" : "プフィク"),
                     "ir" => "プフィ" + (isLast ? "ー" : "ァ"),
                     "o" => "プフォ",
                     "oo" => "プフォー",
@@ -759,7 +759,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Or" => "プフォェ" + (isLast ? "ー" : "ァ"),
                     "U" => "プフィ",
                     "Ur" => "プフィ" + (isLast ? "ー" : "ァ"),
-                    _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                    _ => word.vowel,
                 },
                 "qu" => word.vowel switch
                 {
@@ -781,7 +781,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "i" => "クヴィ",
                     "ie" => "クヴィー",
                     "ier" => "クヴィ" + (isLast ? "アー" : "ーァ"),
-                    "ig" => (isLast ? "クヴィク" : "クヴィグ"),
+                    "ig" => (isLast ? "クヴィヒ" : "クヴィク"),
                     "ir" => "クヴィ" + (isLast ? "ー" : "ァ"),
                     "o" => "クヴォ",
                     "oo" => "クヴォー",
@@ -796,7 +796,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Or" => "クヴォェ" + (isLast ? "ー" : "ァ"),
                     "U" => "クヴィ",
                     "Ur" => "クヴィ" + (isLast ? "ー" : "ァ"),
-                    _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                    _ => word.vowel,
                 },
                 "r" => word.vowel switch
                 {
@@ -818,7 +818,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "i" => "ルィ",
                     "ie" => "ルィー",
                     "ier" => "ルィ" + (isLast ? "アー" : "ーァ"),
-                    "ig" => (isLast ? "ルィク" : "ルィグ"),
+                    "ig" => (isLast ? "ルィヒ" : "ルィク"),
                     "ir" => "ルィ" + (isLast ? "ー" : "ァ"),
                     "o" => "ルォ",
                     "oo" => "ルォー",
@@ -833,7 +833,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Or" => "ルォェ" + (isLast ? "ー" : "ァ"),
                     "U" => "ルィ",
                     "Ur" => "ルィ" + (isLast ? "ー" : "ァ"),
-                    _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                    _ => word.vowel,
                 },
                 "rh" => word.vowel switch
                 {
@@ -855,7 +855,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "i" => "ルィ",
                     "ie" => "ルィー",
                     "ier" => "ルィ" + (isLast ? "アー" : "ーァ"),
-                    "ig" => (isLast ? "ルィク" : "ルィグ"),
+                    "ig" => (isLast ? "ルィヒ" : "ルィク"),
                     "ir" => "ルィ" + (isLast ? "ー" : "ァ"),
                     "o" => "ルォ",
                     "oo" => "ルォー",
@@ -870,7 +870,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Or" => "ルォェ" + (isLast ? "ー" : "ァ"),
                     "U" => "ルィ",
                     "Ur" => "ルィ" + (isLast ? "ー" : "ァ"),
-                    _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                    _ => word.vowel,
                 },
                 "s" => word.vowel switch
                 {
@@ -892,7 +892,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "i" => "ジ",
                     "ie" => "ジー",
                     "ier" => "ジ" + (isLast ? "アー" : "ーァ"),
-                    "ig" => (isLast ? "ジク" : "ジグ"),
+                    "ig" => (isLast ? "ジヒ" : "ジク"),
                     "ir" => "ジ" + (isLast ? "ー" : "ァ"),
                     "o" => "ゾ",
                     "oo" => "ゾー",
@@ -907,7 +907,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Or" => "ゾェ" + (isLast ? "ー" : "ァ"),
                     "U" => "ズィ",
                     "Ur" => "ズィ" + (isLast ? "ー" : "ァ"),
-                    _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                    _ => word.vowel,
                 },
                 "sch" => word.vowel switch
                 {
@@ -929,7 +929,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "i" => "シィ",
                     "ie" => "シィー",
                     "ier" => "シィ" + (isLast ? "アー" : "ーァ"),
-                    "ig" => (isLast ? "シィク" : "シィグ"),
+                    "ig" => (isLast ? "シィヒ" : "シィク"),
                     "ir" => "シィ" + (isLast ? "ー" : "ァ"),
                     "o" => "ショ",
                     "oo" => "ショー",
@@ -944,7 +944,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Or" => "ショェ" + (isLast ? "ー" : "ァ"),
                     "U" => "シュィ",
                     "Ur" => "シュィ" + (isLast ? "ー" : "ァ"),
-                    _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                    _ => word.vowel,
                 },
                 "sp" => isFirst
                     ? word.vowel switch
@@ -967,7 +967,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                         "i" => "シュピ",
                         "ie" => "シュピー",
                         "ier" => "シュピ" + (isLast ? "アー" : "ーァ"),
-                        "ig" => (isLast ? "シュピク" : "シュピグ"),
+                        "ig" => (isLast ? "シュピヒ" : "シュピク"),
                         "ir" => "シュピ" + (isLast ? "ー" : "ァ"),
                         "o" => "シュポ",
                         "oo" => "シュポー",
@@ -982,7 +982,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                         "Or" => "シュポェ" + (isLast ? "ー" : "ァ"),
                         "U" => "シュプィ",
                         "Ur" => "シュプィ" + (isLast ? "ー" : "ァ"),
-                        _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                        _ => word.vowel,
                     }
                     : word.vowel switch
                     {
@@ -1004,7 +1004,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                         "i" => "スピ",
                         "ie" => "スピー",
                         "ier" => "スピ" + (isLast ? "アー" : "ーァ"),
-                        "ig" => (isLast ? "スピク" : "スピグ"),
+                        "ig" => (isLast ? "スピヒ" : "スピク"),
                         "ir" => "スピ" + (isLast ? "ー" : "ァ"),
                         "o" => "スポ",
                         "oo" => "スポー",
@@ -1019,7 +1019,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                         "Or" => "スポェ" + (isLast ? "ー" : "ァ"),
                         "U" => "スプィ",
                         "Ur" => "スプィ" + (isLast ? "ー" : "ァ"),
-                        _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                        _ => word.vowel,
                     },
                 "ss" => word.vowel switch
                 {
@@ -1041,7 +1041,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "i" => "シ",
                     "ie" => "シー",
                     "ier" => "シ" + (isLast ? "アー" : "ーァ"),
-                    "ig" => (isLast ? "シク" : "シグ"),
+                    "ig" => (isLast ? "シヒ" : "シク"),
                     "ir" => "シ" + (isLast ? "ー" : "ァ"),
                     "o" => "ソ",
                     "oo" => "ソー",
@@ -1056,7 +1056,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Or" => "ソェ" + (isLast ? "ー" : "ァ"),
                     "U" => "スィ",
                     "Ur" => "スィ" + (isLast ? "ー" : "ァ"),
-                    _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                    _ => word.vowel,
                 },
                 "st" => isFirst
                     ? word.vowel switch
@@ -1079,7 +1079,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                         "i" => "シュティ",
                         "ie" => "シュティー",
                         "ier" => "シュティ" + (isLast ? "アー" : "ーァ"),
-                        "ig" => (isLast ? "シュティク" : "シュティグ"),
+                        "ig" => (isLast ? "シュティヒ" : "シュティク"),
                         "ir" => "シュティ" + (isLast ? "ー" : "ァ"),
                         "o" => "シュト",
                         "oo" => "シュトー",
@@ -1094,7 +1094,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                         "Or" => "シュトェ" + (isLast ? "ー" : "ァ"),
                         "U" => "シュトゥィ",
                         "Ur" => "シュトゥィ" + (isLast ? "ー" : "ァ"),
-                        _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                        _ => word.vowel,
                     }
                     : word.vowel switch
                     {
@@ -1116,7 +1116,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                         "i" => "スティ",
                         "ie" => "スティー",
                         "ier" => "スティ" + (isLast ? "アー" : "ーァ"),
-                        "ig" => (isLast ? "スティク" : "スティグ"),
+                        "ig" => (isLast ? "スティヒ" : "スティク"),
                         "ir" => "スティ" + (isLast ? "ー" : "ァ"),
                         "o" => "スト",
                         "oo" => "ストー",
@@ -1131,7 +1131,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                         "Or" => "ストェ" + (isLast ? "ー" : "ァ"),
                         "U" => "ストゥィ",
                         "Ur" => "ストゥィ" + (isLast ? "ー" : "ァ"),
-                        _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                        _ => word.vowel,
                     },
                 "B" => word.vowel switch
                 {
@@ -1153,7 +1153,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "i" => "シ",
                     "ie" => "シー",
                     "ier" => "シ" + (isLast ? "アー" : "ーァ"),
-                    "ig" => (isLast ? "シク" : "シグ"),
+                    "ig" => (isLast ? "シヒ" : "シク"),
                     "ir" => "シ" + (isLast ? "ー" : "ァ"),
                     "o" => "ソ",
                     "oo" => "ソー",
@@ -1168,7 +1168,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Or" => "ソェ" + (isLast ? "ー" : "ァ"),
                     "U" => "スィ",
                     "Ur" => "スィ" + (isLast ? "ー" : "ァ"),
-                    _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                    _ => word.vowel,
                 },
                 "t" => word.vowel switch
                 {
@@ -1190,7 +1190,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "i" => "ツィ",
                     "ie" => "ツィー",
                     "ier" => "ツィ" + (isLast ? "アー" : "ーァ"),
-                    "ig" => (isLast ? "ツィク" : "ツィグ"),
+                    "ig" => (isLast ? "ツィヒ" : "ツィク"),
                     "ir" => "ツィ" + (isLast ? "ー" : "ァ"),
                     "o" => "ト",
                     "oo" => "トー",
@@ -1205,7 +1205,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Or" => "トェ" + (isLast ? "ー" : "ァ"),
                     "U" => "トゥィ",
                     "Ur" => "トゥィ" + (isLast ? "ー" : "ァ"),
-                    _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                    _ => word.vowel,
                 },
                 "th" => word.vowel switch
                 {
@@ -1227,7 +1227,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "i" => "ティ",
                     "ie" => "ティー",
                     "ier" => "ティ" + (isLast ? "アー" : "ーァ"),
-                    "ig" => (isLast ? "ティク" : "ティグ"),
+                    "ig" => (isLast ? "ティヒ" : "ティク"),
                     "ir" => "ティ" + (isLast ? "ー" : "ァ"),
                     "o" => "ト",
                     "oo" => "トー",
@@ -1242,7 +1242,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Or" => "トェ" + (isLast ? "ー" : "ァ"),
                     "U" => "トゥィ",
                     "Ur" => "トゥィ" + (isLast ? "ー" : "ァ"),
-                    _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                    _ => word.vowel,
                 },
                 "ti" => "ツィ"
                     + ("", word.vowel).ToSyllable(isFirst, isLast, lastWord, nextWord, lastSyllable, vowels),
@@ -1266,7 +1266,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "i" => "ツィ",
                     "ie" => "ツィー",
                     "ier" => "ツィ" + (isLast ? "アー" : "ーァ"),
-                    "ig" => (isLast ? "ツィク" : "ツィグ"),
+                    "ig" => (isLast ? "ツィヒ" : "ツィク"),
                     "ir" => "ツィ" + (isLast ? "ー" : "ァ"),
                     "o" => "ツォ",
                     "oo" => "ツォー",
@@ -1281,7 +1281,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Or" => "ツォェ" + (isLast ? "ー" : "ァ"),
                     "U" => "ツィ",
                     "Ur" => "ツィ" + (isLast ? "ー" : "ァ"),
-                    _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                    _ => word.vowel,
                 },
                 "tz" => word.vowel switch
                 {
@@ -1303,7 +1303,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "i" => "ツィ",
                     "ie" => "ツィー",
                     "ier" => "ツィ" + (isLast ? "アー" : "ーァ"),
-                    "ig" => (isLast ? "ツィク" : "ツィグ"),
+                    "ig" => (isLast ? "ツィヒ" : "ツィク"),
                     "ir" => "ツィ" + (isLast ? "ー" : "ァ"),
                     "o" => "ツォ",
                     "oo" => "ツォー",
@@ -1318,7 +1318,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Or" => "ツォェ" + (isLast ? "ー" : "ァ"),
                     "U" => "ツィ",
                     "Ur" => "ツィ" + (isLast ? "ー" : "ァ"),
-                    _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                    _ => word.vowel,
                 },
                 "tsch" => word.vowel switch
                 {
@@ -1340,7 +1340,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "i" => "チィ",
                     "ie" => "チィー",
                     "ier" => "チィ" + (isLast ? "アー" : "ーァ"),
-                    "ig" => (isLast ? "チィク" : "チィグ"),
+                    "ig" => (isLast ? "チィヒ" : "チィク"),
                     "ir" => "チィ" + (isLast ? "ー" : "ァ"),
                     "o" => "チョ",
                     "oo" => "チョー",
@@ -1355,7 +1355,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Or" => "チョェ" + (isLast ? "ー" : "ァ"),
                     "U" => "チュィ",
                     "Ur" => "チュィ" + (isLast ? "ー" : "ァ"),
-                    _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                    _ => word.vowel,
                 },
                 "v" => word.vowel switch
                 {
@@ -1377,7 +1377,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "i" => "フィ",
                     "ie" => "フィー",
                     "ier" => "フィ" + (isLast ? "アー" : "ーァ"),
-                    "ig" => (isLast ? "フィク" : "フィグ"),
+                    "ig" => (isLast ? "フィヒ" : "フィク"),
                     "ir" => "フィ" + (isLast ? "ー" : "ァ"),
                     "o" => "フォ",
                     "oo" => "フォー",
@@ -1392,7 +1392,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Or" => "フォェ" + (isLast ? "ー" : "ァ"),
                     "U" => "フィ",
                     "Ur" => "フィ" + (isLast ? "ー" : "ァ"),
-                    _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                    _ => word.vowel,
                 },
                 "w" => word.vowel switch
                 {
@@ -1414,7 +1414,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "i" => "ヴィ",
                     "ie" => "ヴィー",
                     "ier" => "ヴィ" + (isLast ? "アー" : "ーァ"),
-                    "ig" => (isLast ? "ヴィク" : "ヴィグ"),
+                    "ig" => (isLast ? "ヴィヒ" : "ヴィク"),
                     "ir" => "ヴィ" + (isLast ? "ー" : "ァ"),
                     "o" => "ヴォ",
                     "oo" => "ヴォー",
@@ -1429,7 +1429,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Or" => "ヴォェ" + (isLast ? "ー" : "ァ"),
                     "U" => "ヴィ",
                     "Ur" => "ヴィ" + (isLast ? "ー" : "ァ"),
-                    _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                    _ => word.vowel,
                 },
                 "x" => word.vowel switch
                 {
@@ -1451,7 +1451,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "i" => "クシ",
                     "ie" => "クシー",
                     "ier" => "クシ" + (isLast ? "アー" : "ーァ"),
-                    "ig" => (isLast ? "クシク" : "クシグ"),
+                    "ig" => (isLast ? "クシヒ" : "クシク"),
                     "ir" => "クシ" + (isLast ? "ー" : "ァ"),
                     "o" => "クソ",
                     "oo" => "クソー",
@@ -1466,7 +1466,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Or" => "クソェ" + (isLast ? "ー" : "ァ"),
                     "U" => "クスィ",
                     "Ur" => "クスィ" + (isLast ? "ー" : "ァ"),
-                    _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                    _ => word.vowel,
                 },
                 "z" => word.vowel switch
                 {
@@ -1488,7 +1488,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "i" => "ツィ",
                     "ie" => "ツィー",
                     "ier" => "ツィ" + (isLast ? "アー" : "ーァ"),
-                    "ig" => (isLast ? "ツィク" : "ツィグ"),
+                    "ig" => (isLast ? "ツィヒ" : "ツィク"),
                     "ir" => "ツィ" + (isLast ? "ー" : "ァ"),
                     "o" => "ツォ",
                     "oo" => "ツォー",
@@ -1503,9 +1503,9 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     "Or" => "ツォェ" + (isLast ? "ー" : "ァ"),
                     "U" => "ツィ",
                     "Ur" => "ツィ" + (isLast ? "ー" : "ァ"),
-                    _ => throw new ArgumentOutOfRangeException(nameof(word.vowel)),
+                    _ => word.vowel,
                 },
-                _ => throw new ArgumentOutOfRangeException(nameof(word.consonant)),
+                _ => word.consonant,
             };
     }
 }
