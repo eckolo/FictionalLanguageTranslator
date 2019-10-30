@@ -14,22 +14,21 @@ namespace FictionalLanguageTranslator.Models.Application.Repository
         {
             "",
             "b",
-            "c", "ch", "chs",
+            "c", "ch",
             "d", "dt",
             "f",
             "g",
             "h",
-            "ig",
             "j",
             "k",
             "l",
             "m",
-            "n", "ng",
+            "n",
             "p", "pf",
             "qu",
-            "r", "rh",
-            "s", "sch", "sp", "ss", "st", "B",
-            "t", "th", "ti", "ts", "tz", "tsch",
+            "r",
+            "s", "sch", "sp", "ss", "st",
+            "t", "th",  "ts", "tz", "tsch",
             "v",
             "w",
             "x",
@@ -40,14 +39,14 @@ namespace FictionalLanguageTranslator.Models.Application.Repository
         /// </summary>
         public List<string> vowels => new List<string>
         {
-            "a", "aa", "ai", "au", "ay",
-            "e", "ee", "ei", "er", "eu", "ey",
-            "i", "ie",
-            "o", "oo",
-            "u",
+            "a", "aa", "ai", "ar", "au", "ay",
+            "e", "ee", "eer", "ei", "er", "eu", "eur", "ey",
+            "i", "ie", "ier", "ig", "ir",
+            "o", "oo", "or",
+            "u", "ur",
             "y",
-            "A", "Au",
-            "O",
+            "A", "Ar", "Au",
+            "O", "Or",
             "U", "Ur",
         };
         /// <summary>
@@ -60,7 +59,7 @@ namespace FictionalLanguageTranslator.Models.Application.Repository
             '「', '」', '（', '）', '\'', '\'',
             ':', ';',
             '…',
-            ',', '.', '、', '。',
+            ',', '.', '、', '。', '・',
             ' ', '　',
         };
         /// <summary>

@@ -1,4 +1,5 @@
-﻿@model FictionalLanguageTranslator.Models.Application.Value.GermanStyleModel
+﻿@using FictionalLanguageTranslator.Models.Application.Service;
+@model FictionalLanguageTranslator.Models.Application.Value.GermanStyleModel
 @{
     ViewData["Title"] = "German Style";
 }
@@ -17,10 +18,17 @@
     </div>
     <button type="submit" class="btn btn-primary">Translate</button>
 }
-@if(@Model.fictional?.Any() ?? false)
+@if(@Model.fictional.IsNotEmpty())
 {
     <div class="card">
         <div class="card-header">Fictional</div>
         <pre class="card-body">@Model.fictional</pre>
+    </div>
+}
+@if(@Model.pronunciation.IsNotEmpty())
+{
+    <div class="card">
+        <div class="card-header">Pronunciation</div>
+        <pre class="card-body">@Model.pronunciation</pre>
     </div>
 }

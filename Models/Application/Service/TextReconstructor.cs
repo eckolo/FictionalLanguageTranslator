@@ -1,9 +1,7 @@
 ﻿using FictionalLanguageTranslator.Models.Application.Repository;
-using FictionalLanguageTranslator.Models.Application.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace FictionalLanguageTranslator.Models.Application.Service
@@ -14,7 +12,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
     public static class TextReconstructor
     {
         public static string ToFictional(this string origin, SpecificCharRepository repos)
-            => (origin?.Any() ?? false)
+            => origin.IsNotEmpty()
             ? origin
             .SeparateSpecialChars(repos)
             .Select(text => text.Translate(repos))
@@ -25,31 +23,31 @@ namespace FictionalLanguageTranslator.Models.Application.Service
             if(origin.IsSpecialChars(repos))
                 return origin;
 
-            var result = origin.ToCodePoint().ToText(repos);
+            var result = origin.ToCodePoint().PickConsonant(repos);
             return result;
         }
-        static string ToText(this ulong onceCode, SpecificCharRepository repos)
+        static string PickConsonant(this ulong originCode, SpecificCharRepository repos)
         {
-            var vowels = repos.vowels;
             var consonants = repos.consonants;
 
-            var vowelIndex = (int)(onceCode % (ulong)vowels.Count());
-
-            var remainingCode = (onceCode - (ulong)vowelIndex) / (ulong)vowels.Count();
-            var consonantIndex = (int)(remainingCode % (ulong)consonants.Count());
-
-            var vowel = vowels[vowelIndex];
+            var consonantIndex = (int)(originCode % (ulong)consonants.Count());
             var consonant = consonants[consonantIndex];
 
-            var nextCode = (remainingCode - (ulong)consonantIndex) / (ulong)consonants.Count();
-            var nextChar = nextCode <= 0 ? "" : nextCode.ToText(repos);
-            return $"{consonant}{vowel}{nextChar}";
+            var nextCode = (originCode - (ulong)consonantIndex) / (ulong)consonants.Count();
+            var nextChar = nextCode > 0 ? nextCode.PickVowels(repos) : "";
+
+            return $"{nextChar}{consonant}";
         }
-        static bool IsSpecialChars(this string text, SpecificCharRepository repos)
-            => !text.Any() || repos.specialLetter.Any(letter => text.Contains(letter));
-        public static IEnumerable<string> SeparateSpecialChars(this string originText, SpecificCharRepository repos)
-            => Regex
-            .Split(originText, $"([{repos.specialLetterText}])")
-            .Where(text => text?.Any() ?? false);
+        static string PickVowels(this ulong originCode, SpecificCharRepository repos)
+        {
+            var vowels = repos.vowels;
+
+            var vowelIndex = (int)(originCode % (ulong)vowels.Count());
+            var vowel = vowels[vowelIndex];
+
+            var nextCode = (originCode - (ulong)vowelIndex) / (ulong)vowels.Count();
+            var nextChar = nextCode > 0 ? nextCode.PickConsonant(repos) : "";
+            return $"{nextChar}{vowel}";
+        }
     }
 }
