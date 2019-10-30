@@ -203,43 +203,9 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                         "Ur" => "フィ" + (isLast ? "ー" : "ァ"),
                         _ => word.vowel,
                     }
-                    : word.vowel switch
-                    {
-                        "" => "ヒ",
-                        "a" => "ヒャ",
-                        "aa" => "ヒャー",
-                        "ai" => "ヒャイ",
-                        "ar" => "ヒャ" + (isLast ? "ー" : "ァ"),
-                        "au" => "ヒャオ",
-                        "ay" => "ヒャイ",
-                        "e" => "ヒェ",
-                        "ee" => "ヒェー",
-                        "eer" => "ヒェ" + (isLast ? "アー" : "ーァ"),
-                        "ei" => "ヒャイ",
-                        "er" => isFirst ? ("ヒェーア") : isLast ? "ヒャー" : "ヒェァ",
-                        "eu" => "ヒョイ",
-                        "eur" => (isLast ? "ヒョェーア" : "ヒョイァ"),
-                        "ey" => "ヒャイ",
-                        "i" => "ヒィ",
-                        "ie" => "ヒィー",
-                        "ier" => "ヒィ" + (isLast ? "アー" : "ーァ"),
-                        "ig" => (isLast ? "ヒィヒ" : "ヒィク"),
-                        "ir" => "ヒィ" + (isLast ? "ー" : "ァ"),
-                        "o" => "ヒョ",
-                        "oo" => "ヒョー",
-                        "or" => "ヒョ" + (isLast ? "ー" : "ァ"),
-                        "u" => "ヒュ",
-                        "ur" => "ヒュ" + (isLast ? "ー" : "ァ"),
-                        "y" => "ヒュィ",
-                        "A" => "ヒェ",
-                        "Ar" => "ヒェ" + (isLast ? "ー" : "ァ"),
-                        "Au" => "ヒョイ",
-                        "O" => "ヒョェ",
-                        "Or" => "ヒョェ" + (isLast ? "ー" : "ァ"),
-                        "U" => "ヒュィ",
-                        "Ur" => "ヒュィ" + (isLast ? "ー" : "ァ"),
-                        _ => word.vowel,
-                    },
+                    : "ヒ"
+                        + ("", word.vowel).ToSyllable(isFirst, isLast, lastWord, nextWord, lastSyllable, vowels)
+                        + (isLast ? "ス" : ""),
                 "chs" => word.vowel switch
                 {
                     "" => "クス",
@@ -467,7 +433,7 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                 },
                 "j" => word.vowel switch
                 {
-                    "" => "ユ",
+                    "" => "ジュ",
                     "a" => "ヤ",
                     "aa" => "ヤー",
                     "ai" => "ヤイ",
@@ -1245,7 +1211,8 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                     _ => word.vowel,
                 },
                 "ti" => "ツィ"
-                    + ("", word.vowel).ToSyllable(isFirst, isLast, lastWord, nextWord, lastSyllable, vowels),
+                    + ("", word.vowel).ToSyllable(isFirst, isLast, lastWord, nextWord, lastSyllable, vowels)
+                    + (isLast ? "ス" : ""),
                 "ts" => word.vowel switch
                 {
                     "" => "ツ",
