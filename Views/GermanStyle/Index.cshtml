@@ -8,27 +8,37 @@
     <h1>ドイツ語っぽい発音の架空言語翻訳機</h1>
 </div>
 
-@using(Html.BeginForm("Index", "GermanStyle", new { charset = "utf8" }, FormMethod.Post, null, new { id = "fm", @class = "form-group" }))
-{
-    <div class="card">
-        <div class="card-header">Japanese</div>
-        <div class="card-body">
-            @Html.TextAreaFor(model => model.japanese, 6, 120, new { id = nameof(Model.japanese), @class = "form-control" })
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            @using(Html.BeginForm("Index", "GermanStyle", new { charset = "utf8" }, FormMethod.Post, null, new { id = "fm", @class = "form-group" }))
+            {
+                <div class="card">
+                    <div class="card-header">Japanese</div>
+                    <div class="card-body">
+                        @Html.TextAreaFor(model => model.japanese, new { id = nameof(Model.japanese), @class = "form-control" })
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Translate</button>
+            }
         </div>
+        @if(@Model.fictional.IsNotEmpty())
+        {
+            <div class="col-sm">
+                <div class="card">
+                    <div class="card-header">Fictional</div>
+                    <pre class="card-body">@Model.fictional</pre>
+                </div>
+            </div>
+        }
+        @if(@Model.pronunciation.IsNotEmpty())
+        {
+            <div class="col-sm">
+                <div class="card">
+                    <div class="card-header">Pronunciation</div>
+                    <pre class="card-body">@Model.pronunciation</pre>
+                </div>
+            </div>
+        }
     </div>
-    <button type="submit" class="btn btn-primary">Translate</button>
-}
-@if(@Model.fictional.IsNotEmpty())
-{
-    <div class="card">
-        <div class="card-header">Fictional</div>
-        <pre class="card-body">@Model.fictional</pre>
-    </div>
-}
-@if(@Model.pronunciation.IsNotEmpty())
-{
-    <div class="card">
-        <div class="card-header">Pronunciation</div>
-        <pre class="card-body">@Model.pronunciation</pre>
-    </div>
-}
+</div>
