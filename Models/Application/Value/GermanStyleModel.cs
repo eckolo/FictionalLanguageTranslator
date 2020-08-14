@@ -9,9 +9,9 @@ namespace FictionalLanguageTranslator.Models.Application.Value
     {
         public GermanStyleModel(string japanese, string fictional, string pronunciation)
         {
-            this.japanese = japanese ?? throw new ArgumentNullException(nameof(japanese));
-            this.fictional = fictional ?? throw new ArgumentNullException(nameof(fictional));
-            this.pronunciation = pronunciation ?? throw new ArgumentNullException(nameof(pronunciation));
+            this.japanese = japanese;
+            this.fictional = fictional;
+            this.pronunciation = pronunciation;
         }
 
         public string japanese { get; }
