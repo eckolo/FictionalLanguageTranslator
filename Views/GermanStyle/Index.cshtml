@@ -1,5 +1,6 @@
 ﻿@using FictionalLanguageTranslator.Models.Application.Service;
-@model FictionalLanguageTranslator.Models.Application.Value.GermanStyleModel
+@using FictionalLanguageTranslator.Models.Application.Value;
+@model GermanStyleModel
 @{
     ViewData["Title"] = "German Style";
 }
@@ -11,16 +12,15 @@
 <div class="container">
     <div class="row">
         <div class="col-sm">
-            @using(Html.BeginForm("Index", "GermanStyle", new { charset = "utf8" }, FormMethod.Post, null, new { id = "fm", @class = "form-group" }))
-            {
+            <form asp-action="Index" method="post" class="form-group">
                 <div class="card">
                     <div class="card-header">Japanese</div>
                     <div class="card-body">
-                        @Html.TextAreaFor(model => model.japanese, 6, 120, new { id = nameof(Model.japanese), @class = "form-control" })
+                        <textarea asp-for="japanese" cols="120" rows="6" class="form-control"></textarea>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Translate</button>
-            }
+            </form>
         </div>
         @if(@Model.fictional.IsNotEmpty())
         {
