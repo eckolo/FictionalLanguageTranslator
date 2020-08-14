@@ -1,6 +1,6 @@
 ﻿@using FictionalLanguageTranslator.Models.Application.Service;
 @using FictionalLanguageTranslator.Models.Application.Value;
-@model GermanStyleModel
+@model GermanStyleIndexViewModel
 @{
     ViewData["Title"] = "German Style";
 }
@@ -10,35 +10,54 @@
 </div>
 
 <div class="container">
-    <div class="row">
-        <div class="col-sm">
-            <form asp-action="Index" method="post" class="form-group">
+    <form asp-action="Index" method="post" class="form-group">
+        <div class="row">
+            <div class="col-sm">
                 <div class="card">
                     <div class="card-header">Japanese</div>
                     <div class="card-body">
-                        <textarea asp-for="japanese" cols="120" rows="6" class="form-control"></textarea>
+                        <textarea asp-for="@Model.translation.japanese" name="japaneseOrigin" cols="120" rows="6" class="form-control"></textarea>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Translate</button>
-            </form>
+            </div>
+            @if(@Model.translation.fictional.IsNotEmpty())
+            {
+                <div class="col-sm">
+                    <div class="card">
+                        <div class="card-header">Fictional</div>
+                        <pre class="card-body">@Model.translation.fictional</pre>
+                    </div>
+                </div>
+            }
+            @if(@Model.translation.pronunciation.IsNotEmpty())
+            {
+                <div class="col-sm">
+                    <div class="card">
+                        <div class="card-header">Pronunciation</div>
+                        <pre class="card-body">@Model.translation.pronunciation</pre>
+                    </div>
+                </div>
+            }
         </div>
-        @if(@Model.fictional.IsNotEmpty())
-        {
+        <div class="row">
             <div class="col-sm">
                 <div class="card">
                     <div class="card-header">Fictional</div>
-                    <pre class="card-body">@Model.fictional</pre>
+                    <div class="card-body">
+                        <textarea asp-for="@Model.pronunciation.fictional" name="fictionalOrigin" cols="120" rows="6" class="form-control"></textarea>
+                    </div>
                 </div>
             </div>
-        }
-        @if(@Model.pronunciation.IsNotEmpty())
-        {
-            <div class="col-sm">
-                <div class="card">
-                    <div class="card-header">Pronunciation</div>
-                    <pre class="card-body">@Model.pronunciation</pre>
+            @if(@Model.pronunciation.pronunciation.IsNotEmpty())
+            {
+                <div class="col-sm">
+                    <div class="card">
+                        <div class="card-header">Pronunciation</div>
+                        <pre class="card-body">@Model.pronunciation.pronunciation</pre>
+                    </div>
                 </div>
-            </div>
-        }
-    </div>
+            }
+        </div>
+        <button type="submit" class="btn btn-primary">Translate</button>
+    </form>
 </div>

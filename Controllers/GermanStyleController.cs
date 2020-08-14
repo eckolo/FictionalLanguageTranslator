@@ -17,13 +17,16 @@ namespace FictionalLanguageTranslator.Controllers
         }
         SpecificCharRepository specificCharRepository { get; }
 
-        public IActionResult Index(string japanese = "")
+        public IActionResult Index(string japaneseOrigin = "", string fictionalOrigin = "")
         {
-            var japaneseText = japanese;
-            var fictionalText = japaneseText.ToFictional(specificCharRepository);
-            var pronunciation = fictionalText.ToGermanStylePronunciation(specificCharRepository);
+            var fictionalTran = japaneseOrigin.ToFictional(specificCharRepository);
+            var pronunciationTran = fictionalTran.ToGermanStylePronunciation(specificCharRepository);
+            var translation = new GermanStyleTranslationModel(japaneseOrigin, fictionalTran, pronunciationTran);
 
-            var model = new GermanStyleModel(japaneseText, fictionalText, pronunciation);
+            var pronunciationPron = fictionalOrigin.ToGermanStylePronunciation(specificCharRepository);
+            var pronunciation = new GermanStylePronunciationModel(fictionalOrigin, pronunciationPron);
+
+            var model = new GermanStyleIndexViewModel(pronunciation, translation);
 
             return View(model);
         }
