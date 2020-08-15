@@ -1,0 +1,17 @@
+﻿@using FictionalLanguageTranslator.Models.Application.Service;
+@using FictionalLanguageTranslator.Models.Application.Value;
+@model GermanStyleErrorRequestModel
+@{
+    ViewData["Title"] = "German Style";
+}
+
+<div class="jumbotron">
+    <h1>ドイツ語っぽい発音の架空言語翻訳機</h1>
+</div>
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">Error</div>
+        <pre class="card-body">@Model.errorText</pre>
+    </div>
+</div>
