@@ -11,53 +11,59 @@
 
 <div class="container">
     <form asp-action="Index" method="post" class="form-group">
-        <div class="row">
-            <div class="col-sm">
-                <div class="card">
-                    <div class="card-header">Japanese</div>
-                    <div class="card-body">
-                        <textarea asp-for="@Model.translation.japanese" name="japaneseOrigin" cols="120" rows="6" class="form-control"></textarea>
+        <details open>
+            <summary>架空言語訳</summary>
+            <div class="row">
+                <div class="col-sm">
+                    <div class="card">
+                        <div class="card-header">Japanese</div>
+                        <div class="card-body">
+                            <textarea asp-for="@Model.translation.japanese" name="japaneseOrigin" cols="120" rows="6" class="form-control"></textarea>
+                        </div>
                     </div>
                 </div>
+                @if(@Model.translation.fictional.IsNotEmpty())
+                {
+                    <div class="col-sm">
+                        <div class="card">
+                            <div class="card-header">Fictional</div>
+                            <pre class="card-body">@Model.translation.fictional</pre>
+                        </div>
+                    </div>
+                }
+                @if(@Model.translation.pronunciation.IsNotEmpty())
+                {
+                    <div class="col-sm">
+                        <div class="card">
+                            <div class="card-header">Pronunciation</div>
+                            <pre class="card-body">@Model.translation.pronunciation</pre>
+                        </div>
+                    </div>
+                }
             </div>
-            @if(@Model.translation.fictional.IsNotEmpty())
-            {
+        </details>
+        <details>
+            <summary>発音変換</summary>
+            <div class="row">
                 <div class="col-sm">
                     <div class="card">
                         <div class="card-header">Fictional</div>
-                        <pre class="card-body">@Model.translation.fictional</pre>
+                        <div class="card-body">
+                            <textarea asp-for="@Model.pronunciation.fictional" name="fictionalOrigin" cols="120" rows="6" class="form-control"></textarea>
+                        </div>
                     </div>
                 </div>
-            }
-            @if(@Model.translation.pronunciation.IsNotEmpty())
-            {
-                <div class="col-sm">
-                    <div class="card">
-                        <div class="card-header">Pronunciation</div>
-                        <pre class="card-body">@Model.translation.pronunciation</pre>
+                @if(@Model.pronunciation.pronunciation.IsNotEmpty())
+                {
+                    <div class="col-sm">
+                        <div class="card">
+                            <div class="card-header">Pronunciation</div>
+                            <pre class="card-body">@Model.pronunciation.pronunciation</pre>
+                        </div>
                     </div>
-                </div>
-            }
-        </div>
-        <div class="row">
-            <div class="col-sm">
-                <div class="card">
-                    <div class="card-header">Fictional</div>
-                    <div class="card-body">
-                        <textarea asp-for="@Model.pronunciation.fictional" name="fictionalOrigin" cols="120" rows="6" class="form-control"></textarea>
-                    </div>
-                </div>
+                }
             </div>
-            @if(@Model.pronunciation.pronunciation.IsNotEmpty())
-            {
-                <div class="col-sm">
-                    <div class="card">
-                        <div class="card-header">Pronunciation</div>
-                        <pre class="card-body">@Model.pronunciation.pronunciation</pre>
-                    </div>
-                </div>
-            }
-        </div>
+        </details>
         <button type="submit" class="btn btn-primary">Translate</button>
     </form>
 </div>
