@@ -24,6 +24,17 @@ namespace FictionalLanguageTranslator.Models.Application.Service
         readonly TextDecomposer textDecomposer;
         readonly TranslationContext context;
 
+        public async Task<string> TranslateToJapanese(string fictionalText)
+        {
+            if(!fictionalText.IsNotEmpty())
+                return fictionalText;
+
+            var japaneseText = textDecomposer.SeparateSpecialChars(fictionalText)
+                .Select(fictional => ReTranslate(fictional))
+                .Aggregate((japanese1, japanese2) => $"{japanese1}{japanese2}");
+
+            return japaneseText;
+        }
         public async Task<string> TranslateToFictional(string japaneseText)
         {
             if(!japaneseText.IsNotEmpty())
@@ -54,6 +65,18 @@ namespace FictionalLanguageTranslator.Models.Application.Service
             var fictional = PickConsonant(codePoint);
 
             return fictional;
+        }
+        string ReTranslate(string fictional)
+        {
+            if(textDecomposer.IsSpecialChars(fictional))
+                return fictional;
+
+            var japanese = context.records
+                .SingleOrDefault(record => record.fictional == fictional)?
+                .japanese
+                ?? string.Empty;
+
+            return japanese;
         }
         async Task<int> SetTransRecord(string japanese, string fictional)
         {

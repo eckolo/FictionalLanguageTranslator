@@ -41,7 +41,8 @@ namespace FictionalLanguageTranslator.Controllers
             var pronunciationPron = pronunciationConverter.Pronounce(fictionalOrigin);
             var pronunciation = new GermanStylePronunciationModel(fictionalOrigin, pronunciationPron);
 
-            var retranslation = new GermanStyleReTranslationModel(fictionalReOrigin, "");
+            var japaneseTran = await textReconstructor.TranslateToJapanese(fictionalReOrigin);
+            var retranslation = new GermanStyleReTranslationModel(fictionalReOrigin, japaneseTran);
 
             var model = new GermanStyleIndexViewModel(translation, pronunciation, retranslation);
 
