@@ -17,7 +17,7 @@ namespace FictionalLanguageTranslator.Controllers
         }
         SpecificCharRepository specificCharRepository { get; }
 
-        public IActionResult Index(string japaneseOrigin = "", string fictionalOrigin = "")
+        public async Task<IActionResult> Index(string japaneseOrigin = "", string fictionalOrigin = "")
         {
             var fictionalTran = japaneseOrigin.ToFictional(specificCharRepository);
             var pronunciationTran = fictionalTran.ToGermanStylePronunciation(specificCharRepository);
