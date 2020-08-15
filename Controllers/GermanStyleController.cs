@@ -29,7 +29,10 @@ namespace FictionalLanguageTranslator.Controllers
         TextReconstructor textReconstructor { get; }
         PronunciationConverter pronunciationConverter { get; }
 
-        public async Task<IActionResult> Index(string japaneseOrigin = "", string fictionalOrigin = "")
+        public async Task<IActionResult> Index(
+            string japaneseOrigin = "",
+            string fictionalOrigin = "",
+            string fictionalReOrigin = "")
         {
             var fictionalTran = await textReconstructor.TranslateToFictional(japaneseOrigin);
             var pronunciationTran = pronunciationConverter.Pronounce(fictionalTran);
@@ -38,7 +41,9 @@ namespace FictionalLanguageTranslator.Controllers
             var pronunciationPron = pronunciationConverter.Pronounce(fictionalOrigin);
             var pronunciation = new GermanStylePronunciationModel(fictionalOrigin, pronunciationPron);
 
-            var model = new GermanStyleIndexViewModel(pronunciation, translation);
+            var retranslation = new GermanStyleReTranslationModel(fictionalReOrigin, "");
+
+            var model = new GermanStyleIndexViewModel(translation, pronunciation, retranslation);
 
             return View(model);
         }

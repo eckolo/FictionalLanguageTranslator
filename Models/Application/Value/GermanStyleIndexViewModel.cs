@@ -8,14 +8,17 @@ namespace FictionalLanguageTranslator.Models.Application.Value
     public class GermanStyleIndexViewModel
     {
         public GermanStyleIndexViewModel(
+            GermanStyleTranslationModel translation,
             GermanStylePronunciationModel pronunciation,
-            GermanStyleTranslationModel translation)
+            GermanStyleReTranslationModel retranslation)
         {
-            this.pronunciation = pronunciation;
             this.translation = translation;
+            this.pronunciation = pronunciation;
+            this.retranslation = retranslation;
         }
 
-        public GermanStylePronunciationModel pronunciation { get; }
         public GermanStyleTranslationModel translation { get; }
+        public GermanStylePronunciationModel pronunciation { get; }
+        public GermanStyleReTranslationModel retranslation { get; }
     }
 }
