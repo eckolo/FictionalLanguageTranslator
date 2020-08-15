@@ -20,7 +20,7 @@ namespace FictionalLanguageTranslator.Controllers
             this.context = context;
 
             textDecomposer = new TextDecomposer(this.specificCharRepository);
-            textReconstructor = new TextReconstructor(this.specificCharRepository, textDecomposer);
+            textReconstructor = new TextReconstructor(this.specificCharRepository, textDecomposer, this.context);
             pronunciationConverter = new PronunciationConverter(this.specificCharRepository, textDecomposer);
         }
         SpecificCharRepository specificCharRepository { get; }
@@ -31,7 +31,7 @@ namespace FictionalLanguageTranslator.Controllers
 
         public async Task<IActionResult> Index(string japaneseOrigin = "", string fictionalOrigin = "")
         {
-            var fictionalTran = textReconstructor.TranslateToFictional(japaneseOrigin);
+            var fictionalTran = await textReconstructor.TranslateToFictional(japaneseOrigin);
             var pronunciationTran = pronunciationConverter.Pronounce(fictionalTran);
             var translation = new GermanStyleTranslationModel(japaneseOrigin, fictionalTran, pronunciationTran);
 

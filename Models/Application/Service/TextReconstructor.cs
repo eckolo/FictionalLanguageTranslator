@@ -1,4 +1,6 @@
-﻿using FictionalLanguageTranslator.Models.Application.Repository;
+﻿using FictionalLanguageTranslator.Models.Application.Entity;
+using FictionalLanguageTranslator.Models.Application.Repository;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,32 +13,64 @@ namespace FictionalLanguageTranslator.Models.Application.Service
     /// </summary>
     public class TextReconstructor
     {
-        public TextReconstructor(SpecificCharRepository specificCharRepository, TextDecomposer textDecomposer)
+        public TextReconstructor(SpecificCharRepository specificCharRepository, TextDecomposer textDecomposer, TranslationContext context)
         {
             this.specificCharRepository = specificCharRepository;
             this.textDecomposer = textDecomposer;
+            this.context = context;
         }
 
         readonly SpecificCharRepository specificCharRepository;
         readonly TextDecomposer textDecomposer;
+        readonly TranslationContext context;
 
-        public string TranslateToFictional(string origin)
+        public async Task<string> TranslateToFictional(string japaneseText)
         {
-            if(!origin.IsNotEmpty())
-                return origin;
+            if(!japaneseText.IsNotEmpty())
+                return japaneseText;
 
-            return textDecomposer.SeparateSpecialChars(origin)
-                .Select(text => Translate(text))
-                .Aggregate((text1, text2) => $"{text1}{text2}");
+            var transPairList = textDecomposer.SeparateSpecialChars(japaneseText)
+                .Select(japanese => (japanese, fictional: Translate(japanese)))
+                .ToList();
+
+            foreach(var (japanese, fictional) in transPairList)
+            {
+                await SetTransRecord(japanese, fictional);
+            }
+
+            var fictionalText = transPairList
+                .Select(pair => pair.fictional)
+                .Aggregate((fictional1, fictional2) => $"{fictional1}{fictional2}");
+
+            return fictionalText;
         }
 
-        string Translate(string origin)
+        string Translate(string japanese)
         {
-            if(textDecomposer.IsSpecialChars(origin))
-                return origin;
-            var codePoint = origin.ToCodePoint();
-            var result = PickConsonant(codePoint);
-            return result;
+            if(textDecomposer.IsSpecialChars(japanese))
+                return japanese;
+
+            var codePoint = japanese.ToCodePoint();
+            var fictional = PickConsonant(codePoint);
+
+            return fictional;
+        }
+        async Task<int> SetTransRecord(string japanese, string fictional)
+        {
+            if(japanese == fictional)
+                return 0;
+            if(textDecomposer.IsSpecialChars(japanese))
+                return 0;
+
+            var exsistJapaneseQuery = context.records.Where(record => record.japanese == japanese);
+            var exsistFictionalQuery = context.records.Where(record => record.fictional == fictional);
+            context.records.RemoveRange(exsistJapaneseQuery);
+            context.records.RemoveRange(exsistFictionalQuery);
+
+            var newRecord = new TranslationRecord { japanese = japanese, fictional = fictional };
+            context.records.Add(newRecord);
+
+            return await context.SaveChangesAsync();
         }
         string PickConsonant(ulong originCode)
         {
