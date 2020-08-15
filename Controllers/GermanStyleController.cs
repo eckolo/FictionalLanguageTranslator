@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FictionalLanguageTranslator.Models.Application.Entity;
 using FictionalLanguageTranslator.Models.Application.Repository;
 using FictionalLanguageTranslator.Models.Application.Service;
 using FictionalLanguageTranslator.Models.Application.Value;
@@ -11,11 +12,15 @@ namespace FictionalLanguageTranslator.Controllers
 {
     public class GermanStyleController : Controller
     {
-        public GermanStyleController(SpecificCharRepository? specificCharRepository = null)
+        public GermanStyleController(
+            TranslationContext context,
+            SpecificCharRepository? specificCharRepository = null)
         {
             this.specificCharRepository = specificCharRepository ?? new SpecificCharRepository();
+            this.context = context;
         }
         SpecificCharRepository specificCharRepository { get; }
+        TranslationContext context { get; }
 
         public async Task<IActionResult> Index(string japaneseOrigin = "", string fictionalOrigin = "")
         {
