@@ -13,10 +13,10 @@ namespace FictionalLanguageTranslator.Controllers
     public class GermanStyleController : Controller
     {
         public GermanStyleController(
-            TranslationContext context,
-            SpecificCharRepository? specificCharRepository = null)
+            SpecificCharRepository specificCharRepository,
+            TranslationContext context)
         {
-            this.specificCharRepository = specificCharRepository ?? new SpecificCharRepository();
+            this.specificCharRepository = specificCharRepository;
             this.context = context;
         }
         SpecificCharRepository specificCharRepository { get; }
