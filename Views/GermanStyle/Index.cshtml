@@ -64,28 +64,6 @@
                 }
             </div>
         </details>
-        <details @Model.retranslationOpen>
-            <summary>和訳</summary>
-            <div class="row">
-                <div class="col-sm">
-                    <div class="card">
-                        <div class="card-header">Fictional</div>
-                        <div class="card-body">
-                            <textarea asp-for="@Model.retranslation.fictional" name="fictionalReOrigin" cols="120" rows="6" class="form-control"></textarea>
-                        </div>
-                    </div>
-                </div>
-                @if(@Model.retranslation.japanese.IsNotEmpty())
-                {
-                    <div class="col-sm">
-                        <div class="card">
-                            <div class="card-header">Japanese</div>
-                            <pre class="card-body">@Model.retranslation.japanese</pre>
-                        </div>
-                    </div>
-                }
-            </div>
-        </details>
         <button type="submit" class="btn btn-primary">Translate</button>
     </form>
 </div>
