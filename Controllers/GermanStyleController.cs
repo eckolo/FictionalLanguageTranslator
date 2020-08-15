@@ -34,19 +34,33 @@ namespace FictionalLanguageTranslator.Controllers
             string fictionalOrigin = "",
             string fictionalReOrigin = "")
         {
-            var fictionalTran = await textReconstructor.TranslateToFictional(japaneseOrigin);
-            var pronunciationTran = pronunciationConverter.Pronounce(fictionalTran);
-            var translation = new GermanStyleTranslationModel(japaneseOrigin, fictionalTran, pronunciationTran);
+            try
+            {
+                var fictionalTran = await textReconstructor.TranslateToFictional(japaneseOrigin);
+                var pronunciationTran = pronunciationConverter.Pronounce(fictionalTran);
+                var translation = new GermanStyleTranslationModel(japaneseOrigin, fictionalTran, pronunciationTran);
 
-            var pronunciationPron = pronunciationConverter.Pronounce(fictionalOrigin);
-            var pronunciation = new GermanStylePronunciationModel(fictionalOrigin, pronunciationPron);
+                var pronunciationPron = pronunciationConverter.Pronounce(fictionalOrigin);
+                var pronunciation = new GermanStylePronunciationModel(fictionalOrigin, pronunciationPron);
 
-            var japaneseTran = await textReconstructor.TranslateToJapanese(fictionalReOrigin);
-            var retranslation = new GermanStyleReTranslationModel(fictionalReOrigin, japaneseTran);
+                var japaneseTran = await textReconstructor.TranslateToJapanese(fictionalReOrigin);
+                var retranslation = new GermanStyleReTranslationModel(fictionalReOrigin, japaneseTran);
 
-            var model = new GermanStyleIndexViewModel(translation, pronunciation, retranslation);
+                var model = new GermanStyleIndexViewModel(translation, pronunciation, retranslation);
 
-            return View(model);
+                return View(model);
+            }
+            catch(Exception error)
+            {
+                var request = new GermanStyleErrorRequestModel { errorText = error.ToString() };
+                return RedirectToAction(nameof(Error), request);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Error(GermanStyleErrorRequestModel request)
+        {
+            return View(request);
         }
     }
 }
