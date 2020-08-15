@@ -44,11 +44,6 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                 .Select(japanese => (japanese, fictional: Translate(japanese)))
                 .ToList();
 
-            foreach(var (japanese, fictional) in transPairList)
-            {
-                await SetTransRecord(japanese, fictional);
-            }
-
             var fictionalText = transPairList
                 .Select(pair => pair.fictional)
                 .Aggregate((fictional1, fictional2) => $"{fictional1}{fictional2}");
