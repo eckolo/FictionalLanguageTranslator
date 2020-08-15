@@ -18,17 +18,24 @@ namespace FictionalLanguageTranslator.Controllers
         {
             this.specificCharRepository = specificCharRepository;
             this.context = context;
+
+            textDecomposer = new TextDecomposer(this.specificCharRepository);
+            textReconstructor = new TextReconstructor(this.specificCharRepository, textDecomposer);
+            pronunciationConverter = new PronunciationConverter(this.specificCharRepository, textDecomposer);
         }
         SpecificCharRepository specificCharRepository { get; }
         TranslationContext context { get; }
+        TextDecomposer textDecomposer { get; }
+        TextReconstructor textReconstructor { get; }
+        PronunciationConverter pronunciationConverter { get; }
 
         public async Task<IActionResult> Index(string japaneseOrigin = "", string fictionalOrigin = "")
         {
-            var fictionalTran = japaneseOrigin.ToFictional(specificCharRepository);
-            var pronunciationTran = fictionalTran.ToGermanStylePronunciation(specificCharRepository);
+            var fictionalTran = textReconstructor.TranslateToFictional(japaneseOrigin);
+            var pronunciationTran = pronunciationConverter.Pronounce(fictionalTran);
             var translation = new GermanStyleTranslationModel(japaneseOrigin, fictionalTran, pronunciationTran);
 
-            var pronunciationPron = fictionalOrigin.ToGermanStylePronunciation(specificCharRepository);
+            var pronunciationPron = pronunciationConverter.Pronounce(fictionalOrigin);
             var pronunciation = new GermanStylePronunciationModel(fictionalOrigin, pronunciationPron);
 
             var model = new GermanStyleIndexViewModel(pronunciation, translation);

@@ -9,44 +9,56 @@ namespace FictionalLanguageTranslator.Models.Application.Service
     /// <summary>
     /// 文字列の再構成処理クラス
     /// </summary>
-    public static class TextReconstructor
+    public class TextReconstructor
     {
-        public static string ToFictional(this string origin, SpecificCharRepository repos)
-            => origin.IsNotEmpty()
-            ? origin
-            .SeparateSpecialChars(repos)
-            .Select(text => text.Translate(repos))
-            .Aggregate((text1, text2) => $"{text1}{text2}")
-            : origin;
-        static string Translate(this string origin, SpecificCharRepository repos)
+        public TextReconstructor(SpecificCharRepository specificCharRepository, TextDecomposer textDecomposer)
         {
-            if(origin.IsSpecialChars(repos))
+            this.specificCharRepository = specificCharRepository;
+            this.textDecomposer = textDecomposer;
+        }
+
+        readonly SpecificCharRepository specificCharRepository;
+        readonly TextDecomposer textDecomposer;
+
+        public string TranslateToFictional(string origin)
+        {
+            if(!origin.IsNotEmpty())
                 return origin;
 
-            var result = origin.ToCodePoint().PickConsonant(repos);
+            return textDecomposer.SeparateSpecialChars(origin)
+                .Select(text => Translate(text))
+                .Aggregate((text1, text2) => $"{text1}{text2}");
+        }
+
+        string Translate(string origin)
+        {
+            if(textDecomposer.IsSpecialChars(origin))
+                return origin;
+            var codePoint = origin.ToCodePoint();
+            var result = PickConsonant(codePoint);
             return result;
         }
-        static string PickConsonant(this ulong originCode, SpecificCharRepository repos)
+        string PickConsonant(ulong originCode)
         {
-            var consonants = repos.consonants;
+            var consonants = specificCharRepository.consonants;
 
             var consonantIndex = (int)(originCode % (ulong)consonants.Count());
             var consonant = consonants[consonantIndex];
 
             var nextCode = (originCode - (ulong)consonantIndex) / (ulong)consonants.Count();
-            var nextChar = nextCode > 0 ? nextCode.PickVowels(repos) : "";
+            var nextChar = nextCode > 0 ? PickVowels(nextCode) : "";
 
             return $"{nextChar}{consonant}";
         }
-        static string PickVowels(this ulong originCode, SpecificCharRepository repos)
+        string PickVowels(ulong originCode)
         {
-            var vowels = repos.vowels;
+            var vowels = specificCharRepository.vowels;
 
             var vowelIndex = (int)(originCode % (ulong)vowels.Count());
             var vowel = vowels[vowelIndex];
 
             var nextCode = (originCode - (ulong)vowelIndex) / (ulong)vowels.Count();
-            var nextChar = nextCode > 0 ? nextCode.PickConsonant(repos) : "";
+            var nextChar = nextCode > 0 ? PickConsonant(nextCode) : "";
             return $"{nextChar}{vowel}";
         }
     }
