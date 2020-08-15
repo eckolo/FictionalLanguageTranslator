@@ -10,28 +10,38 @@ namespace FictionalLanguageTranslator.Models.Application.Service
     /// <summary>
     /// 文字列分解サービス
     /// </summary>
-    public static class TextDecomposer
+    public class TextDecomposer
     {
-        public static IEnumerable<string> SeparateSpecialChars(this string originText, SpecificCharRepository repos)
+        public TextDecomposer(SpecificCharRepository specificCharRepository)
+        {
+            this.specificCharRepository = specificCharRepository;
+        }
+
+        readonly SpecificCharRepository specificCharRepository;
+
+        public IEnumerable<string> SeparateSpecialChars(string originText)
             => Regex
-            .Split(originText, $"([{repos.specialLetterText}])")
+            .Split(originText, $"([{specificCharRepository.specialLetterText}])")
             .Where(text => text.IsNotEmpty());
-        public static List<string> BreakSyllables(this string origin, SpecificCharRepository repos)
+        public List<string> BreakSyllables(string origin)
         {
             if(!origin.IsNotEmpty())
                 return new List<string>();
 
-            var syllables = repos.consonants.Concat(repos.vowels).Where(letter => letter.IsNotEmpty());
+            var syllables = specificCharRepository.consonants.Concat(specificCharRepository.vowels).Where(letter => letter.IsNotEmpty());
 
             var syllable = syllables
                 .Where(letter => origin.StartsWith(letter))
                 .OrderByDescending(letter => letter.Length)
                 .FirstOrDefault();
 
-            var trailingList = origin.Substring(syllable?.Length ?? 1).BreakSyllables(repos);
+            var originExcludedSyllable = origin.Substring(syllable?.Length ?? 1);
+            var trailingList = BreakSyllables(originExcludedSyllable);
 
             var result = (syllable is string ? new[] { syllable } : new string[] { }).Concat(trailingList).ToList();
             return result;
         }
+        public bool IsSpecialChars(string text)
+            => !text.Any() || specificCharRepository.specialLetter.Any(letter => text.Contains(letter));
     }
 }

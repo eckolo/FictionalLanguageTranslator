@@ -9,30 +9,40 @@ namespace FictionalLanguageTranslator.Models.Application.Service
     /// <summary>
     /// 文字列の音声化処理クラス
     /// </summary>
-    public static class PronunciationConverter
+    public class PronunciationConverter
     {
-        public static string ToGermanStylePronunciation(this string text, SpecificCharRepository repos)
+        public PronunciationConverter(SpecificCharRepository specificCharRepository, TextDecomposer textDecomposer)
+        {
+            this.specificCharRepository = specificCharRepository;
+            this.textDecomposer = textDecomposer;
+        }
+
+        readonly SpecificCharRepository specificCharRepository;
+        readonly TextDecomposer textDecomposer;
+
+        public string Pronounce(string text)
             => text.IsNotEmpty()
-            ? text
-            .SeparateSpecialChars(repos)
-            .Select(text => text.Translate(repos))
+            ? textDecomposer
+            .SeparateSpecialChars(text)
+            .Select(text => Translate(text))
             .Aggregate((text1, text2) => $"{text1}{text2}")
             : text;
-        static string Translate(this string origin, SpecificCharRepository repos)
+        string Translate(string origin)
         {
-            if(origin.IsSpecialChars(repos))
+            if(textDecomposer.IsSpecialChars(origin))
                 return origin;
 
-            var result = origin.BreakSyllables(repos).RaiseSyllablesLetters(repos);
+            var syllables = textDecomposer.BreakSyllables(origin);
+            var result = RaiseSyllablesLetters(syllables);
             return result;
         }
-        static string RaiseSyllablesLetters(this List<string> wordList, SpecificCharRepository repos, bool isFirst = true, string lastWord = "", string lastSyllable = "")
+        string RaiseSyllablesLetters(List<string> wordList, bool isFirst = true, string lastWord = "", string lastSyllable = "")
         {
             if(wordList is null || !wordList.Any())
                 return "";
 
             var head = wordList.First();
-            var headIsConsonants = repos.consonants.Contains(head);
+            var headIsConsonants = specificCharRepository.consonants.Contains(head);
 
             var consonant = headIsConsonants ? head : "";
             var vowel = headIsConsonants ? (wordList.Skip(1).FirstOrDefault() ?? "") : head;
@@ -49,9 +59,9 @@ namespace FictionalLanguageTranslator.Models.Application.Service
                 lastWord: lastWord,
                 nextWord: nextWord,
                 lastSyllable: lastSyllable,
-                vowels: repos.vowels);
+                vowels: specificCharRepository.vowels);
 
-            var nextNowSyllable = trailingWords.RaiseSyllablesLetters(repos, false, nextLastWord, nowSyllable);
+            var nextNowSyllable = RaiseSyllablesLetters(trailingWords, false, nextLastWord, nowSyllable);
 
             return $"{nowSyllable}{nextNowSyllable}";
         }
